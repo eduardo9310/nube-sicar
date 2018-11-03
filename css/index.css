@@ -1,0 +1,65 @@
+/*
+*{
+	border: solid red 10px;
+}
+*/
+.bg{
+	background: #F0F3F4;
+}
+
+.css-title{
+	border-radius: 10px 0px 0px 10px;
+	background: #DAF7A6;
+	height: 50px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.css-title-tienda{
+	border-radius: 0px 10px 10px 0px;
+	background: #839192;
+	color:  white;
+
+}
+
+.css-opciones{
+	border-radius: 10px;
+	background: #FAF3DD;
+	height: 530px;
+	padding: 10px;
+}
+
+.css-listamovimientos{
+	padding: 10px;
+	border-radius: 2px;
+	height: 530px;
+}
+
+.h3-titile{
+	padding: 2px;
+}
+
+/*Spinner Loader*/
+.loader {
+	border: 16px solid #f3f3f3;
+	border-radius: 50%;
+	border-top: 16px solid blue;
+	border-right: 16px solid green;
+	border-bottom: 16px solid red;
+	border-left: 16px solid pink;
+	width: 120px;
+	height: 120px;
+	-webkit-animation: spin 2s linear infinite;
+	animation: spin 2s linear infinite;
+}
+
+@-webkit-keyframes spin {
+	0% { -webkit-transform: rotate(0deg); }
+	100% { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes spin {
+	0% { transform: rotate(0deg); }
+	100% { transform: rotate(360deg); }
+}
