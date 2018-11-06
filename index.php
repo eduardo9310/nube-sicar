@@ -26,6 +26,7 @@
 		</div>
 
 		<div class="row mt-3">
+
 			<div class="col-4 css-opciones">
 				<div class="h3-titile">
 					<h3 class="text-center">Enviar Artículos</h3>
@@ -61,7 +62,7 @@
 				</form>
 
 				<div class="mt-5 text-center" id="notificacion">
-					<i class="far fa-spinner fa-spin" style="font-size:80px;color:#339af0"></i>
+					<i class="far fa-spinner fa-spin" style="font-size:80px; color:#339af0"></i>
 				</div>
 			</div>
 
@@ -71,144 +72,144 @@
 				</div>
 
 				<div class="lista-movimientos" id="refresh-data">
-					<?php 
-
-					$t1 = new mysqli('localhost','root','javac','sicar');
 					
+					<?php 
+					$t1 = new mysqli('localhost','root','javac','sicar');
+
 					if($t1->connect_errno):
-						echo "Error de conexion".$t1->connect_error;
+						echo "Error de conexion" . $t1->connect_error;
 					endif;
 
-					$query_consulta_ajusteinventarioarticulo = "SELECT * FROM ajusteinventarioarticulo order by ain_id desc limit 7";
-					$mysqli_consulta_ajusteinventarioarticulo = mysqli_query($t1, $query_consulta_ajusteinventarioarticulo);
+					$query_articulo = "SELECT a.clave, a.descripcion, a.precio1, aia.exisAnterior, aia.exisActual, ai.comentario FROM ajusteinventarioarticulo aia INNER JOIN articulo a ON aia.art_id = a.art_id INNER JOIN ajusteinventario ai ON aia.ain_id = ai.ain_id ORDER BY ai.fecha DESC LIMIT 10";
 
+					$consulta_articulo = mysqli_query($t1, $query_articulo);
 
+					while($row = mysqli_fetch_array($consulta_articulo)){
 
-					while($row = mysqli_fetch_array($mysqli_consulta_ajusteinventarioarticulo)) {
+						$cadena_entrada = $row['comentario'];
+						$buscar_entrada = "Entrada";
+						$posicion_entrada = strpos($cadena_entrada, $buscar_entrada);
 
-						$query_consulta_articulo = "SELECT * FROM articulo where art_id='".$row['art_id'] ."'";
-						$mysqli_consulta_articulo = mysqli_query($t1, $query_consulta_articulo);
+						$cadena_salida = $row['comentario'];
+						$buscar_salida = 'Salida';
+						$posicion_salida = strpos($cadena_salida, $buscar_salida);
 
-						$query_consulta_ajusteinventario = "SELECT * FROM ajusteinventario where ain_id ='".$row['ain_id']."'";
-						$mysqli_consulta_ajusteinventario = mysqli_query($t1, $query_consulta_ajusteinventario);
+						if($posicion_entrada === 0 or $posicion_salida === 0) {
 
-						echo "<div class='alert alert-success alert-dismissible fade show' role='alert'>";
-						echo $row['exisActual'] -  $row['exisAnterior'];
-						echo "pzs</span> &nbsp;";
+							if ($posicion_entrada === 0 ) {
 
-						while($row_articulo = mysqli_fetch_array($mysqli_consulta_articulo)) {
-
-							echo  "<span class='text-uppercase'>".$row_articulo['clave']."</span> &nbsp;".$row_articulo['descripcion'];
-
-							while($row_ajusteinventario = mysqli_fetch_array($mysqli_consulta_ajusteinventario)) {
-
-								$cadena_de_texto = $row_ajusteinventario['comentario'];
-								$cadena_buscada   = 'Entregado';
-								$posicion_coincidencia = strpos($cadena_de_texto, $cadena_buscada);
-
-
-								if($posicion_coincidencia === false) {
-									echo "&nbsp; <strong class='text-danger'> &nbsp; &nbsp;" . $row_ajusteinventario['comentario']."</strong><br>";
-									echo "<button type='button' class='close' data-dismiss='alert' aria-label='Close' id='btn-close'>
-									<span aria-hidden='true'>&times;</span></button></div>";									
-
-								}else{
-									echo "&nbsp; <strong class='text-success'> &nbsp; &nbsp;" . $row_ajusteinventario['comentario']."</strong> <br>";
-									echo "<button type='button' class='close' data-dismiss='alert' aria-label='Close'>
-									<span aria-hidden='true'>&times;</span></button></div>";
-								}
-
+								echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
+								<strong>';
+								echo $row['exisActual']-$row['exisAnterior'];
+								echo'&nbsp;&nbsp;&nbsp;</strong>';
+								echo $row['clave'] . "&nbsp;" . $row['descripcion'] . "&nbsp;&nbsp;&nbsp;&nbsp;" . $row['comentario'] . "<br>";
+								echo '<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+								</button>
+								</div>';
 							}
-						}
 
+							if ($posicion_salida === 0 ) {
+
+								echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+								<strong>';
+								echo $row['exisAnterior'] - $row['exisActual'];
+								echo'&nbsp;&nbsp;&nbsp;</strong>';
+								echo $row['clave'] . "&nbsp;" . $row['descripcion'] . "&nbsp;&nbsp;&nbsp;&nbsp;" . $row['comentario'] . "<br>";
+								echo '<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+								</button>
+								</div>';
+							}
+
+						}
 					}
 					?>
+					
 				</div>
 			</div>
-
 		</div>
 	</div>
-</div>
 
-<script type="text/javascript">
-	
-	var time = setInterval(function(){
-		$('#refresh-data').load(' #refresh-data');
-	}, 8500);
+	<script type="text/javascript">
 
-
-	notification_hide();
-
-	function notification_hide(){
-
-		$('#notificacion').hide();
-	}
-
-	function notification_show(){
-		$('#notificacion').show();
-	}
+		var time = setInterval(function(){
+			$('#refresh-data').load(' #refresh-data');
+		}, 8500);
 
 
-	function notification_hite_incorrecto(e){
-		setTimeout(function(){
-			alertify.warning("Datos Incorrectos");
-			notification_hide();
-		},1000);
-	}
-
-	function notification_hite_errorTransferencia(){
-		alertify.error("Error en la Transferencia");
 		notification_hide();
-	}
+
+		function notification_hide(){
+
+			$('#notificacion').hide();
+		}
+
+		function notification_show(){
+			$('#notificacion').show();
+		}
 
 
-	function refresh(){
-		$('#refresh-data').load(' #refresh-data');
-	}
+		function notification_hite_incorrecto(e){
+			setTimeout(function(){
+				alertify.warning("Datos Incorrectos");
+				notification_hide();
+			},1000);
+		}
 
-	$(document).ready(function() {
+		function notification_hite_errorTransferencia(){
+			alertify.error("Error en la Transferencia");
+			notification_hide();
+		}
 
-		$('#btn-enviar').click(function(e){
-			e.preventDefault();
 
-			refresh();
-			notification_show();
+		function refresh(){
+			$('#refresh-data').load(' #refresh-data');
+		}
 
-			var datos = $('#form-datos').serialize();
-			var sucursal_a = $('#inputsucursal').val();
-			var cantidad_a = $('#inputcantidad').val();
-			var clave_a = $('#inputclave').val();
+		$(document).ready(function() {
 
-			if(sucursal_a !="0"  && cantidad_a > 0 && cantidad_a % 1 == 0 && clave_a !=''){
-				$.ajax({
-					type:"POST",
-					url: "crud/crud.php",
-					data: datos,
+			$('#btn-enviar').click(function(e){
+				e.preventDefault();
 
-					success:function(e){
-						if(e == 1){
-
-							alertify.success("Transferencia Exitosa");
-							$('#inputsucursal').val('0');
-							$('#inputcantidad').val('');
-							$('#inputclave').val('');
-							notification_hide();
-
-							refresh();
-
-						}else{
-							notification_show();
-							notification_hite_errorTransferencia();
-						}
-					}
-				});
-			}else{
+				refresh();
 				notification_show();
-				notification_hite_incorrecto();
-			}
+
+				var datos = $('#form-datos').serialize();
+				var sucursal_a = $('#inputsucursal').val();
+				var cantidad_a = $('#inputcantidad').val();
+				var clave_a = $('#inputclave').val();
+
+				if(sucursal_a !="0"  && cantidad_a > 0 && cantidad_a % 1 == 0 && clave_a !=''){
+					$.ajax({
+						type:"POST",
+						url: "crud/crud.php",
+						data: datos,
+
+						success:function(e){
+							if(e == 1){
+
+								alertify.success("Transferencia Exitosa");
+								$('#inputsucursal').val('0');
+								$('#inputcantidad').val('');
+								$('#inputclave').val('');
+								notification_hide();
+
+								refresh();
+
+							}else{
+								notification_show();
+								notification_hite_errorTransferencia();
+							}
+						}
+					});
+				}else{
+					notification_show();
+					notification_hite_incorrecto();
+				}
+			});
 		});
-	});
-</script>
+	</script>
 
 </body>
 </html>

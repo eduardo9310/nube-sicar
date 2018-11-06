@@ -101,7 +101,7 @@ $query_articulo_actualizarinventario = "UPDATE articulo SET existencia ='".$nuev
 //Insertar datos en tabla ajusteinventario para el comentario de Transeferencia.
 ini_set('date.timezone','America/Mexico_City');
 $fecha_actual_ajusteinventario = $fecha = date("Y")."-".date("m")."-".date("d")." ". date("H").":".date("i").":".date("s");
-$comentario_ajusteinventario = "Enviado a &rarr; Tienda ".$comentario_sucursal;
+$comentario_ajusteinventario = "Salida ( " .$comentario_sucursal." )";
 $query_ajusteinventario = "INSERT INTO ajusteinventario(fecha, comentario) values ('".$fecha_actual_ajusteinventario."','".$comentario_ajusteinventario."')";
 
 //Insertar Datos en la tabala ajusteinventarioarticulo.
@@ -136,7 +136,7 @@ $s_query_articulo_actualizarinventario = "UPDATE articulo SET existencia ='".$s_
 
 //Insertar datos en tabla ajusteinventario para el comentario de Transeferencia.
 $s_fecha_actual_ajusteinventario = $fecha = date("Y")."-".date("m")."-".date("d")." ". date("H").":".date("i").":".date("s");
-$s_comentario_ajusteinventario = "Entregado &rarr; Tienda 1";
+$s_comentario_ajusteinventario = "Entrada  ( Tienda 1 )";
 $s_query_ajusteinventario = "INSERT INTO ajusteinventario(fecha, comentario) values ('".$fecha_actual_ajusteinventario."','".$s_comentario_ajusteinventario."')";
 
 //Insertar Datos en la tabala ajusteinventarioarticulo.
