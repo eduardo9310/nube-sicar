@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
-	<title>Traspasos SICAR</title>
+	<title>Nube SICAR</title>
 	<link rel="stylesheet" href="css/index.css">
 	<link rel="stylesheet" href="css/bootstrap.min.css">
 	<link rel="stylesheet" href="css/alertify.css">
