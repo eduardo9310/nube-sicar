@@ -13,55 +13,55 @@ $direccion_ip = $_POST['inputsucursal'];
 
 switch ($direccion_ip) {
     case "1":
-    $server_ip = "192.168.10.104";
+    $server_ip = "192.168.0.15";
     break;
     
     case "2":
-    $server_ip = "192.168.10.104";
+    $server_ip = "localhost";
     break;
     
     case "3":
-    $server_ip = "192.168.10.104";
+    $server_ip = "ip_address";
     break;
     
     case "4":
-    $server_ip = "192.168.10.104";
+    $server_ip = "ip_address";
     break;
     
     case "5":
-    $server_ip = "192.168.10.104";
+    $server_ip = "ip_address";
     break;
     
     case "6":
-    $server_ip = "192.168.10.104";
+    $server_ip = "ip_address";
     break;
     
     case "7":
-    $server_ip = "192.168.10.104";
+    $server_ip = "ip_address";
     break;
     
     case "8":
-    $server_ip = "192.168.10.104";
+    $server_ip = "ip_address";
     break;
     
     case "9":
-    $server_ip = "192.168.10.104";
+    $server_ip = "ip_address";
     break;
     
     case "10":
-    $server_ip = "192.168.10.104";
+    $server_ip = "ip_address";
     break;
     
     case "11":
-    $server_ip = "192.168.10.104";
+    $server_ip = "ip_address";
     break;
     
     case "12":
-    $server_ip = "192.168.10.104";
+    $server_ip = "ip_address";
     break;
     
     case "13":
-    $server_ip = "192.168.10.104";
+    $server_ip = "ip_address";
     break;
     
     default:
@@ -101,7 +101,7 @@ $query_articulo_actualizarinventario = "UPDATE articulo SET existencia ='".$nuev
 //Insertar datos en tabla ajusteinventario para el comentario de Transeferencia.
 ini_set('date.timezone','America/Mexico_City');
 $fecha_actual_ajusteinventario = $fecha = date("Y")."-".date("m")."-".date("d")." ". date("H").":".date("i").":".date("s");
-$comentario_ajusteinventario = "Salida ( " .$comentario_sucursal." )";
+$comentario_ajusteinventario = "Salida (Tienda " .$comentario_sucursal.")";
 $query_ajusteinventario = "INSERT INTO ajusteinventario(fecha, comentario) values ('".$fecha_actual_ajusteinventario."','".$comentario_ajusteinventario."')";
 
 //Insertar Datos en la tabala ajusteinventarioarticulo.
@@ -136,7 +136,7 @@ $s_query_articulo_actualizarinventario = "UPDATE articulo SET existencia ='".$s_
 
 //Insertar datos en tabla ajusteinventario para el comentario de Transeferencia.
 $s_fecha_actual_ajusteinventario = $fecha = date("Y")."-".date("m")."-".date("d")." ". date("H").":".date("i").":".date("s");
-$s_comentario_ajusteinventario = "Entrada  ( Tienda 1 )";
+$s_comentario_ajusteinventario = "Entrada  (Tienda 2)";
 $s_query_ajusteinventario = "INSERT INTO ajusteinventario(fecha, comentario) values ('".$fecha_actual_ajusteinventario."','".$s_comentario_ajusteinventario."')";
 
 //Insertar Datos en la tabala ajusteinventarioarticulo.

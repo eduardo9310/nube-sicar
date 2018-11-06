@@ -21,7 +21,7 @@
 				<h1 class="text-center text-primary"> Nube SICAR </h1>
 			</div>
 			<div class="col-2 css-title css-title-tienda">
-				<h3 class="font-weight-bold"> Tienda 3</h3>
+				<h3 class="font-weight-bold"> Tienda 2</h3>
 			</div>
 		</div>
 
@@ -96,11 +96,11 @@
 
 						if($posicion_entrada === 0 or $posicion_salida === 0) {
 
-							if ($posicion_entrada === 0 ) {
+							if ($posicion_entrada === 0) {
 
 								echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
 								<strong>';
-								echo $row['exisActual']-$row['exisAnterior'];
+								echo $row['exisActual']- $row['exisAnterior'];
 								echo'&nbsp;&nbsp;&nbsp;</strong>';
 								echo $row['clave'] . "&nbsp;" . $row['descripcion'] . "&nbsp;&nbsp;&nbsp;&nbsp;" . $row['comentario'] . "<br>";
 								echo '<button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -109,11 +109,11 @@
 								</div>';
 							}
 
-							if ($posicion_salida === 0 ) {
+							else{
 
 								echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
 								<strong>';
-								echo $row['exisAnterior'] - $row['exisActual'];
+								echo $row['exisActual'] - $row['exisAnterior'];
 								echo'&nbsp;&nbsp;&nbsp;</strong>';
 								echo $row['clave'] . "&nbsp;" . $row['descripcion'] . "&nbsp;&nbsp;&nbsp;&nbsp;" . $row['comentario'] . "<br>";
 								echo '<button type="button" class="close" data-dismiss="alert" aria-label="Close">
