@@ -1,8 +1,6 @@
 <?php 
 
 //Conexion para el equipo Primario
-sleep(1.2);
-
 $t1 = new mysqli('localhost','root','javac','sicar');
 if($t1->connect_errno):
 	echo "Error de conexion".$t1->connect_error;

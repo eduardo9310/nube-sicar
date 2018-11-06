@@ -10,6 +10,7 @@
 	<script src="js/jquery-3.2.1.min.js"></script>
 	<script src="js/bootstrap.min.js"></script>
 	<script src="js/alertify.js"></script>
+	<script src="js/fontawesome.min.js"></script>
 </head>
 
 <body class="bg">
@@ -59,10 +60,9 @@
 					<button class="btn btn-block btn-primary" id="btn-enviar">Enviar Datos</button>
 				</form>
 
-				<div class="mt-5 text-center" id="notificacion" height="20px"></div>
-				<div class="mt-5 text-center" id="info-server"></div>
-
-
+				<div class="mt-5 text-center" id="notificacion">
+					<i class="fa fa-spinner fa-spin" style="font-size:80px;color:grey"></i>
+				</div>
 			</div>
 
 			<div class="col-8 css-listamovimientos">
@@ -130,30 +130,55 @@
 </div>
 
 <script type="text/javascript">
+	
 	var time = setInterval(function(){
 		$('#refresh-data').load(' #refresh-data');
-		console.log('ok!');
 	}, 8000);
+
+
+	notification_hide();
+
+	function notification_hide(){
+
+		$('#notificacion').hide();
+	}
+
+	function notification_show(){
+		$('#notificacion').show();
+	}
+
+
+	function notification_hite_incorrecto(){
+		setTimeout(function(){
+			alertify.warning("Datos Incorrectos");
+			notification_hide();
+		},2000);
+	}
+
+	function notification_hite_errorTransferencia(){
+			alertify.error("Error en la Transferencia");
+			notification_hide();
+	}
 
 
 	function refresh(){
 		$('#refresh-data').load(' #refresh-data');
-		console.log('ok!');
 	}
+
 	$(document).ready(function() {
 
 		$('#btn-enviar').click(function(e){
 			e.preventDefault();
 
 			refresh();
+			notification_show();
 
 			var datos = $('#form-datos').serialize();
 			var sucursal_a = $('#inputsucursal').val();
 			var cantidad_a = $('#inputcantidad').val();
 			var clave_a = $('#inputclave').val();
-			if(sucursal_a !="0"  && cantidad_a > 0 && cantidad_a % 1 == 0 && clave_a !=''){
-				$('#notificacion').addClass("loader");
 
+			if(sucursal_a !="0"  && cantidad_a > 0 && cantidad_a % 1 == 0 && clave_a !=''){
 				$.ajax({
 					type:"POST",
 					url: "crud/crud.php",
@@ -166,21 +191,19 @@
 							$('#inputsucursal').val('0');
 							$('#inputcantidad').val('');
 							$('#inputclave').val('');
-							$('#notificacion').removeClass("loader");
+							notification_hide();
 
 							refresh();
 
 						}else{
-
-							alertify.error("Error en la Transferencia");
-							$('#notificacion').removeClass("loader");
+							notification_show();
+							notification_hite_errorTransferencia();
 						}
 					}
-
 				});
-
 			}else{
-				alertify.warning("Datos Incorrectos");
+				notification_show();
+				notification_hite_incorrecto();
 			}
 		});
 	});
