@@ -18,7 +18,7 @@
 	<div class="container">
 		<div class="row mt-1">
 			<div class="col-10 css-title">
-				<h1 class="text-center text-primary">Nube SICAR</h1>
+				<h1 class="text-center text-primary"> Nube SICAR </h1>
 			</div>
 			<div class="col-2 css-title css-title-tienda">
 				<h3 class="font-weight-bold"> Tienda 3</h3>
@@ -61,7 +61,7 @@
 				</form>
 
 				<div class="mt-5 text-center" id="notificacion">
-					<i class="fa fa-spinner fa-spin" style="font-size:80px;color:grey"></i>
+					<i class="far fa-spinner fa-spin" style="font-size:80px;color:#339af0"></i>
 				</div>
 			</div>
 
@@ -106,6 +106,7 @@
 								$cadena_buscada   = 'Entregado';
 								$posicion_coincidencia = strpos($cadena_de_texto, $cadena_buscada);
 
+
 								if($posicion_coincidencia === false) {
 									echo "&nbsp; <strong class='text-danger'> &nbsp; &nbsp;" . $row_ajusteinventario['comentario']."</strong><br>";
 									echo "<button type='button' class='close' data-dismiss='alert' aria-label='Close' id='btn-close'>
@@ -133,7 +134,7 @@
 	
 	var time = setInterval(function(){
 		$('#refresh-data').load(' #refresh-data');
-	}, 8000);
+	}, 8500);
 
 
 	notification_hide();
@@ -148,16 +149,16 @@
 	}
 
 
-	function notification_hite_incorrecto(){
+	function notification_hite_incorrecto(e){
 		setTimeout(function(){
 			alertify.warning("Datos Incorrectos");
 			notification_hide();
-		},2000);
+		},1000);
 	}
 
 	function notification_hite_errorTransferencia(){
-			alertify.error("Error en la Transferencia");
-			notification_hide();
+		alertify.error("Error en la Transferencia");
+		notification_hide();
 	}
 
 
